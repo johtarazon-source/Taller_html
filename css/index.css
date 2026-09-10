@@ -1,0 +1,449 @@
+/* ===== Variables y base ===== */
+
+:root {
+    --fondo: #0b0d17;
+    --borde: #272c42;
+    --texto: #eef0f8;
+    --ps5: #2e6ff2;
+    --xbox: #3fbf5a;
+    --xbox-lima: #8fd400;
+    --switch: #e63946;
+    --steam: #4a9fd8;
+    --radio: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+/* ===== Pantalla única: mosaico de consolas ===== */
+
+.pantalla-consolas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.mosaico-consolas {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 1300px;
+    height: 640px;
+}
+
+.franja {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border-radius: var(--radio);
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid var(--borde-marca, var(--borde));
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    transition: flex-grow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+    color: #fff;
+}
+
+.franja:hover {
+    border-color: #ffffff;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.5),
+                0 0 0 4px var(--glow-marca, rgba(255, 255, 255, 0.25)),
+                0 0 55px 6px var(--glow-marca, rgba(255, 255, 255, 0.25));
+}
+
+.franja-xbox { --borde-marca: #2f7d3f; --glow-marca: rgba(143, 212, 0, 0.55); }
+.franja-ps5 { --borde-marca: #1d4fb0; --glow-marca: rgba(70, 140, 255, 0.55); }
+.franja-switch { --borde-marca: #b5232f; --glow-marca: rgba(230, 57, 70, 0.55); }
+.franja-steam { --borde-marca: #2a72a8; --glow-marca: rgba(74, 159, 216, 0.55); }
+
+.mosaico-consolas:hover .franja {
+    flex-grow: 1;
+}
+
+.mosaico-consolas:hover .franja:hover {
+    flex-grow: 6;
+}
+
+/* ---- Contenido visible mientras la franja está angosta ---- */
+
+.franja-colapsada {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 20px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.franja:hover .franja-colapsada {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.franja-nombre {
+    font-size: 1.05rem;
+    line-height: 1.3;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 1px;
+}
+
+/* ---- Contenido que aparece al expandirse ---- */
+
+.franja-expandida {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 40px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+}
+
+.franja:hover .franja-expandida {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.franja-expandida .marca {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.franja-expandida h3 {
+    font-size: 1.8rem;
+    margin: 6px 0 12px;
+    white-space: nowrap;
+}
+
+.franja-control {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 26px;
+}
+
+.franja-subtitulo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 14px;
+}
+
+.juegos-destacados {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 640px;
+}
+
+.juego-bloque {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 10px;
+    padding: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.juego-bloque:hover {
+    transform: translateY(-6px);
+    border-color: var(--borde-bloque, rgba(255, 255, 255, 0.5));
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5), 0 0 20px var(--borde-bloque, rgba(255, 255, 255, 0.35));
+}
+
+.juego-bloque span {
+    position: relative;
+    z-index: 1;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Cada bloque simula una portada con un patrón abstracto distinto,
+   hecho solo con gradientes de CSS (sin ninguna imagen ni arte real). */
+
+.juego-bloque::before,
+.juego-bloque::after {
+    content: "";
+    position: absolute;
+}
+
+/* jb-1: franjas diagonales */
+.jb-1 {
+    --borde-bloque: rgba(255, 140, 66, 0.7);
+    background: linear-gradient(155deg, #b6551f, #401708);
+}
+
+.jb-1::before {
+    inset: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0 10px,
+        transparent 10px 26px
+    );
+}
+
+.jb-1::after {
+    left: -20%;
+    right: -20%;
+    bottom: -30%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 70%);
+}
+
+/* jb-2: círculos concéntricos */
+.jb-2 {
+    --borde-bloque: rgba(184, 108, 255, 0.7);
+    background: linear-gradient(155deg, #7c3fc9, #2a1345);
+}
+
+.jb-2::before {
+    top: 14%;
+    right: -18%;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.16);
+    box-shadow: inset 0 0 0 16px rgba(255, 255, 255, 0.05);
+}
+
+.jb-2::after {
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.55));
+}
+
+/* jb-3: cuadrícula fina */
+.jb-3 {
+    --borde-bloque: rgba(66, 224, 168, 0.7);
+    background: linear-gradient(155deg, #1a8f63, #0a3324);
+}
+
+.jb-3::before {
+    inset: 0;
+    background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+    background-size: 18px 18px;
+}
+
+.jb-3::after {
+    left: 0;
+    right: 0;
+    bottom: -10%;
+    height: 55%;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.6));
+}
+
+/* jb-4: rayo/destello angular */
+.jb-4 {
+    --borde-bloque: rgba(255, 209, 66, 0.7);
+    background: linear-gradient(155deg, #c98a1f, #402c08);
+}
+
+.jb-4::before {
+    top: -30%;
+    left: 30%;
+    width: 3px;
+    height: 160%;
+    background: rgba(255, 255, 255, 0.35);
+    transform: rotate(20deg);
+    box-shadow: -24px 10px 0 -1px rgba(255, 255, 255, 0.12),
+                24px -10px 0 -1px rgba(255, 255, 255, 0.12);
+}
+
+.jb-4::after {
+    inset: 0;
+    background: radial-gradient(circle at 30% 100%, rgba(255, 255, 255, 0.2), transparent 60%);
+}
+
+/* ---- Logos hechos con CSS puro ---- */
+
+.logo-marca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-ps span {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.logo-xbox .aro-xbox {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15), 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.logo-switch {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.logo-switch .ficha-roja {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background-color: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.logo-switch .texto-switch {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo-steam .engranaje-steam {
+    position: relative;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.logo-steam .engranaje-steam::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--steam);
+    transform: translate(-50%, -50%);
+}
+
+.logo-steam .engranaje-steam::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--steam);
+}
+
+/* =========================================================
+   Fondo temático de cada franja
+   ========================================================= */
+
+.franja-xbox {
+    background:
+        radial-gradient(circle at 30% 70%, var(--xbox-lima) 0%, var(--xbox) 40%, transparent 75%),
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.12), transparent 40%),
+        #04140a;
+}
+
+.franja-ps5 {
+    background:
+        radial-gradient(circle at 70% 20%, rgba(70, 140, 255, 0.75), transparent 55%),
+        radial-gradient(circle at 15% 85%, rgba(155, 90, 255, 0.35), transparent 55%),
+        linear-gradient(200deg, #1b2130 0%, #0a0d16 55%, #05070d 100%);
+}
+
+.franja-switch {
+    background:
+        radial-gradient(circle at 70% 25%, rgba(255, 214, 92, 0.55), transparent 55%),
+        radial-gradient(circle at 15% 85%, rgba(255, 90, 110, 0.4), transparent 55%),
+        linear-gradient(200deg, #c0202f 0%, #6e0f1c 55%, #22060b 100%);
+}
+
+.franja-steam {
+    background:
+        radial-gradient(circle at 30% 25%, rgba(120, 200, 255, 0.6), transparent 55%),
+        radial-gradient(circle at 85% 80%, rgba(90, 140, 255, 0.3), transparent 55%),
+        linear-gradient(200deg, #1c5188 0%, #10304f 55%, #061420 100%);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+    .pantalla-consolas {
+        padding: 16px;
+    }
+
+    /* En pantallas medianas el mosaico se apila en columna:
+       cada franja se expande en altura en vez de en ancho. */
+    .mosaico-consolas {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .franja {
+        flex: none;
+        height: 90px;
+        transition: height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .mosaico-consolas:hover .franja {
+        flex-grow: 0;
+    }
+
+    .franja:hover {
+        height: 420px;
+    }
+
+    .franja-nombre {
+        writing-mode: horizontal-tb;
+    }
+
+    .franja-colapsada {
+        flex-direction: row;
+        gap: 14px;
+    }
+
+    .franja-expandida {
+        padding: 24px;
+    }
+
+    .franja-expandida h3 {
+        white-space: normal;
+    }
+
+    .juegos-destacados {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: none;
+    }
+}
