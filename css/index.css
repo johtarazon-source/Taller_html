@@ -33,18 +33,17 @@ body {
 
 .pantalla-consolas {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    min-height: 100vh;
-    padding: 24px;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .mosaico-consolas {
     display: flex;
-    gap: 10px;
     width: 100%;
-    max-width: 1300px;
-    height: 640px;
+    height: 100%;
 }
 
 .franja {
@@ -52,28 +51,87 @@ body {
     flex: 1;
     display: flex;
     align-items: center;
-    border-radius: var(--radio);
-    overflow: hidden;
+    overflow: visible;
     cursor: pointer;
-    border: 3px solid var(--borde-marca, var(--borde));
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-    transition: flex-grow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-                box-shadow 0.4s ease,
-                border-color 0.4s ease;
     color: #fff;
+    transition: flex-grow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                filter 0.4s ease;
 }
+
+.franja-colapsada,
+.franja-expandida {
+    overflow: hidden;
+}
+
+/* Cada franja (salvo la primera) se solapa un poco con la anterior
+   y recorta su propio borde izquierdo en zigzag, de modo que el
+   "diente" de rasgadura queda pintado con su propio color por encima
+   del color de la franja vecina: parece papel rasgado, no un hueco. */
+.franja:not(:first-child) {
+    margin-left: -22px;
+    clip-path: polygon(
+        22px 0, 100% 0, 100% 100%, 22px 100%,
+        22px 96.5%, 6px 93%, 19px 89.5%, 4px 86%, 20px 82.5%,
+        5px 79%, 21px 75.5%, 3px 72%, 18px 68.5%, 6px 65%,
+        20px 61.5%, 4px 58%, 19px 54.5%, 5px 51%, 21px 47.5%,
+        3px 44%, 20px 40.5%, 6px 37%, 21px 33.5%, 4px 30%,
+        18px 26.5%, 5px 23%, 20px 19.5%, 3px 16%, 19px 12.5%,
+        6px 9%, 21px 5.5%, 4px 2%, 22px 0
+    );
+}
+
+/* Índice ascendente de izquierda a derecha para que cada diente
+   quede por encima de la franja que tiene detrás. */
+.franja:nth-child(1) { z-index: 4; }
+.franja:nth-child(2) { z-index: 3; }
+.franja:nth-child(3) { z-index: 2; }
+.franja:nth-child(4) { z-index: 1; }
 
 .franja:hover {
-    border-color: #ffffff;
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.5),
-                0 0 0 4px var(--glow-marca, rgba(255, 255, 255, 0.25)),
-                0 0 55px 6px var(--glow-marca, rgba(255, 255, 255, 0.25));
+    filter: brightness(1.08);
+    z-index: 10;
 }
 
-.franja-xbox { --borde-marca: #2f7d3f; --glow-marca: rgba(143, 212, 0, 0.55); }
-.franja-ps5 { --borde-marca: #1d4fb0; --glow-marca: rgba(70, 140, 255, 0.55); }
-.franja-switch { --borde-marca: #b5232f; --glow-marca: rgba(230, 57, 70, 0.55); }
-.franja-steam { --borde-marca: #2a72a8; --glow-marca: rgba(74, 159, 216, 0.55); }
+/* Sombra sutil pegada al filo rasgado para dar profundidad,
+   como si el "papel" de encima proyectara sombra sobre el de abajo. */
+.franja:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.22) 35%,
+        transparent 75%);
+}
+
+.franja-xbox {
+    --borde-marca: #2f7d3f;
+    --glow-marca: rgba(143, 212, 0, 0.55);
+    --color-marca: #9bf00b;
+}
+
+.franja-ps5 {
+    --borde-marca: #1d4fb0;
+    --glow-marca: rgba(70, 140, 255, 0.55);
+    --color-marca: #4d95ff;
+}
+
+.franja-switch {
+    --borde-marca: #b5232f;
+    --glow-marca: rgba(230, 57, 70, 0.55);
+    --color-marca: #ff4655;
+}
+
+.franja-steam {
+    --borde-marca: #2a72a8;
+    --glow-marca: rgba(74, 159, 216, 0.55);
+    --color-marca: #4fc3f7;
+}
 
 .mosaico-consolas:hover .franja {
     flex-grow: 1;
@@ -92,9 +150,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 18px;
-    padding: 20px;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0 20px 12%;
     text-align: center;
     opacity: 1;
     transition: opacity 0.35s ease;
@@ -106,11 +164,18 @@ body {
 }
 
 .franja-nombre {
-    font-size: 1.05rem;
+    font-size: 1.4rem;
+    font-weight: 700;
     line-height: 1.3;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+}
+
+.franja-eslogan {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 8px;
+    max-width: 220px;
 }
 
 /* ---- Contenido que aparece al expandirse ---- */
@@ -128,6 +193,82 @@ body {
 .franja:hover .franja-expandida {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* El panel expandido de cada consola muestra un fondo con los
+   colores propios de su marca y su logo en grande como marca de
+   agua, en vez de la foto de la consola (que solo se ve en la
+   miniatura contraída). Este bloque cubre TODA la franja (no solo
+   la caja de texto de .franja-expandida, que no tiene altura
+   propia) y solo se muestra cuando la franja está en hover. */
+.franja-fondo-marca {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.franja:hover .franja-fondo-marca {
+    opacity: 0;
+}
+
+.franja-fondo-marca::after {
+    content: "";
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.franja-xbox .franja-fondo-marca {
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        linear-gradient(115deg, #0d3d17 0%, #145c22 45%, #1f8a34 100%);
+}
+
+.franja-xbox .franja-fondo-marca::after {
+    width: 150px;
+    height: 150px;
+    background: url("../imagnes/logo_xbox.png") center / contain no-repeat;
+    opacity: 0.9;
+}
+
+.franja-ps5 .franja-fondo-marca {
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        linear-gradient(115deg, #061c4d 0%, #0d3489 45%, #1959d6 100%);
+}
+
+.franja-ps5 .franja-fondo-marca::after {
+    width: 130px;
+    height: 130px;
+    background: url("../imagnes/play_station.png") center / contain no-repeat;
+}
+
+.franja-switch .franja-fondo-marca {
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        linear-gradient(115deg, #4a0d14 0%, #8a1a24 45%, #d92e3a 100%);
+}
+
+.franja-switch .franja-fondo-marca::after {
+    width: 130px;
+    height: 130px;
+    background: url("../imagnes/logo_nintendo.png") center / contain no-repeat;
+}
+
+.franja-steam .franja-fondo-marca {
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        linear-gradient(115deg, #0a2438 0%, #124467 45%, #1f74b8 100%);
+}
+
+.franja-steam .franja-fondo-marca::after {
+    width: 140px;
+    height: 140px;
+    background: url("../imagnes/logo_steam.png") center / contain no-repeat;
 }
 
 .franja-expandida .marca {
@@ -174,24 +315,45 @@ body {
     border-radius: 10px;
     padding: 12px;
     overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    border: 2px solid var(--color-marca, rgba(255, 255, 255, 0.5));
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.45),
+        0 0 14px -2px var(--color-marca, transparent),
+        inset 0 0 12px -4px var(--color-marca, transparent);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .juego-bloque:hover {
     transform: translateY(-6px);
-    border-color: var(--borde-bloque, rgba(255, 255, 255, 0.5));
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5), 0 0 20px var(--borde-bloque, rgba(255, 255, 255, 0.35));
+    box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.55),
+        0 0 26px 2px var(--color-marca, rgba(255, 255, 255, 0.4)),
+        inset 0 0 18px -4px var(--color-marca, transparent);
 }
 
 .juego-bloque span {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     font-size: 0.85rem;
     font-weight: 700;
     line-height: 1.25;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* ---- Bloques con foto real del juego ---- */
+
+.juego-bloque img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.35s ease;
+}
+
+.juego-bloque.jb-foto:hover img {
+    transform: scale(1.06);
 }
 
 /* Cada bloque simula una portada con un patrón abstracto distinto,
@@ -291,130 +453,106 @@ body {
     background: radial-gradient(circle at 30% 100%, rgba(255, 255, 255, 0.2), transparent 60%);
 }
 
-/* ---- Logos hechos con CSS puro ---- */
-
-.logo-marca {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Anula el patrón decorativo de gradientes cuando el bloque ya tiene
+   una foto real, y añade una sombra inferior para que el texto siga
+   siendo legible por encima de la imagen. */
+.juego-bloque.jb-foto::after {
+    content: none;
 }
 
-.logo-ps span {
-    font-size: 1.8rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-.logo-xbox .aro-xbox {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 6px solid #fff;
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15), 0 6px 18px rgba(0, 0, 0, 0.3);
-}
-
-.logo-switch {
-    flex-direction: column;
-    gap: 8px;
-}
-
-.logo-switch .ficha-roja {
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-    background-color: #fff;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-}
-
-.logo-switch .texto-switch {
-    font-size: 1rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.logo-steam .engranaje-steam {
-    position: relative;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background-color: #fff;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-}
-
-.logo-steam .engranaje-steam::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: var(--steam);
-    transform: translate(-50%, -50%);
-}
-
-.logo-steam .engranaje-steam::after {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--steam);
+.juego-bloque.jb-foto::before {
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.75) 100%);
 }
 
 /* =========================================================
    Fondo temático de cada franja
    ========================================================= */
 
-.franja-xbox {
-    background:
-        radial-gradient(circle at 30% 70%, var(--xbox-lima) 0%, var(--xbox) 40%, transparent 75%),
-        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.12), transparent 40%),
-        #04140a;
+/* Color base de cada franja, visible por debajo de las dos capas de
+   fondo (logo de marca en la miniatura, foto de la consola al
+   expandirse). */
+.franja-xbox { background-color: #04140a; }
+.franja-ps5 { background-color: #05070d; }
+.franja-switch { background-color: #22060b; }
+.franja-steam { background-color: #061420; }
+
+/* Foto de la consola con su control: aparece solo cuando la franja se
+   expande. Se escala por altura (auto X%) y se ancla a la derecha para
+   que quede entera, a un costado del texto, sin recortes. El degradado
+   es más opaco a la izquierda, donde van el título y las portadas. */
+.franja-fondo-consola {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease 0.1s;
 }
 
-.franja-ps5 {
-    background:
-        radial-gradient(circle at 70% 20%, rgba(70, 140, 255, 0.75), transparent 55%),
-        radial-gradient(circle at 15% 85%, rgba(155, 90, 255, 0.35), transparent 55%),
-        linear-gradient(200deg, #1b2130 0%, #0a0d16 55%, #05070d 100%);
+.franja:hover .franja-fondo-consola {
+    opacity: 1;
 }
 
-.franja-switch {
-    background:
-        radial-gradient(circle at 70% 25%, rgba(255, 214, 92, 0.55), transparent 55%),
-        radial-gradient(circle at 15% 85%, rgba(255, 90, 110, 0.4), transparent 55%),
-        linear-gradient(200deg, #c0202f 0%, #6e0f1c 55%, #22060b 100%);
+.franja-fondo-consola::after {
+    content: "";
+    position: absolute;
+    inset: 0;
 }
 
-.franja-steam {
-    background:
-        radial-gradient(circle at 30% 25%, rgba(120, 200, 255, 0.6), transparent 55%),
-        radial-gradient(circle at 85% 80%, rgba(90, 140, 255, 0.3), transparent 55%),
-        linear-gradient(200deg, #1c5188 0%, #10304f 55%, #061420 100%);
+.franja-xbox .franja-fondo-consola {
+    background: url("../imagnes/xbox-console-control.png") right 8% center / auto 72% no-repeat;
+}
+
+.franja-xbox .franja-fondo-consola::after {
+    background: linear-gradient(100deg, rgba(4, 20, 10, 0.92) 0%, rgba(4, 20, 10, 0.6) 50%, rgba(4, 20, 10, 0.2) 100%);
+}
+
+.franja-ps5 .franja-fondo-consola {
+    background: url("../imagnes/ps5-console-control.png") right 8% center / auto 78% no-repeat;
+}
+
+.franja-ps5 .franja-fondo-consola::after {
+    background: linear-gradient(100deg, rgba(5, 7, 13, 0.92) 0%, rgba(5, 7, 13, 0.6) 50%, rgba(5, 7, 13, 0.2) 100%);
+}
+
+.franja-switch .franja-fondo-consola {
+    background: url("../imagnes/switch2-console-control.png") right 6% center / auto 62% no-repeat;
+}
+
+.franja-switch .franja-fondo-consola::after {
+    background: linear-gradient(100deg, rgba(34, 6, 11, 0.92) 0%, rgba(34, 6, 11, 0.6) 50%, rgba(34, 6, 11, 0.2) 100%);
+}
+
+.franja-steam .franja-fondo-consola {
+    background: url("../imagnes/steam-deck-console-control.png") right 6% center / auto 58% no-repeat;
+}
+
+.franja-steam .franja-fondo-consola::after {
+    background: linear-gradient(100deg, rgba(6, 20, 32, 0.92) 0%, rgba(6, 20, 32, 0.6) 50%, rgba(6, 20, 32, 0.2) 100%);
 }
 
 /* ===== Responsive ===== */
 
 @media (max-width: 768px) {
     .pantalla-consolas {
-        padding: 16px;
+        height: 100dvh;
     }
 
     /* En pantallas medianas el mosaico se apila en columna:
-       cada franja se expande en altura en vez de en ancho. */
+       cada franja se expande en altura en vez de en ancho,
+       y la rasgadura pasa a ser un filo horizontal. */
     .mosaico-consolas {
         flex-direction: column;
-        height: auto;
+        height: 100%;
     }
 
     .franja {
         flex: none;
         height: 90px;
-        transition: height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        transition: height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                    filter 0.4s ease;
     }
 
     .mosaico-consolas:hover .franja {
@@ -425,13 +563,59 @@ body {
         height: 420px;
     }
 
-    .franja-nombre {
-        writing-mode: horizontal-tb;
+    .franja:not(:first-child) {
+        margin-left: 0;
+        margin-top: -22px;
+        clip-path: polygon(
+            0 22px, 0 100%, 100% 100%, 100% 22px,
+            96.5% 22px, 93% 6px, 89.5% 19px, 86% 4px, 82.5% 20px,
+            79% 5px, 75.5% 21px, 72% 3px, 68.5% 18px, 65% 6px,
+            61.5% 20px, 58% 4px, 54.5% 19px, 51% 5px, 47.5% 21px,
+            44% 3px, 40.5% 20px, 37% 6px, 33.5% 21px, 30% 4px,
+            26.5% 18px, 23% 5px, 19.5% 20px, 16% 3px, 12.5% 19px,
+            9% 6px, 5.5% 21px, 2% 4px, 0 22px
+        );
     }
 
+    .franja:not(:first-child)::before {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 34px;
+        background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.5) 0%,
+            rgba(0, 0, 0, 0.22) 35%,
+            transparent 75%);
+    }
+
+    /* En la franja contraída (90px de alto) solo cabe el nombre; el
+       eslogan se oculta y el detalle completo aparece al expandir. El
+       logo de fondo se reduce y se corre a un lado para no quedar
+       detrás del texto. */
     .franja-colapsada {
         flex-direction: row;
+        justify-content: center;
         gap: 14px;
+        padding: 0 20px;
+    }
+
+    .franja-fondo-marca::after {
+        top: 50%;
+        left: 18%;
+        width: 62px;
+        height: 62px;
+    }
+
+    .franja-xbox .franja-fondo-marca::after,
+    .franja-ps5 .franja-fondo-marca::after,
+    .franja-switch .franja-fondo-marca::after,
+    .franja-steam .franja-fondo-marca::after {
+        width: 62px;
+        height: 62px;
+    }
+
+    .franja-eslogan {
+        display: none;
     }
 
     .franja-expandida {
