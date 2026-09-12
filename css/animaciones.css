@@ -1,7 +1,4 @@
-/* =========================================================
-   Animaciones compartidas por todas las páginas del sitio.
-   Se enlaza en cada página junto a su hoja de estilos propia.
-   ========================================================= */
+
 
 @keyframes flotar {
     0%   { transform: translateY(0); }

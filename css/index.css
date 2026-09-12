@@ -1,17 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap');
-
-
 
 :root {
-    --fondo: #151a2e;
-    --superficie: #1e2440;
-    --borde: #3e4874;
-    --borde-suave: rgba(255, 255, 255, 0.07);
-    --borde-brillo: rgba(255, 255, 255, 0.14);
+    --fondo: #0b0d17;
+    --borde: #272c42;
     --texto: #eef0f8;
-    --texto-tenue: rgba(238, 240, 248, 0.65);
-    --acento: #7c5cff;
-    --acento-claro: #a78bff;
     --ps5: #2e6ff2;
     --xbox: #3fbf5a;
     --xbox-lima: #8fd400;
@@ -31,142 +22,12 @@ html, body {
 }
 
 body {
-    font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--fondo);
-    background-image:
-        radial-gradient(900px 500px at 15% -5%, rgba(124, 92, 255, 0.13), transparent 70%),
-        radial-gradient(800px 500px at 90% 0%, rgba(46, 111, 242, 0.11), transparent 70%);
-    background-attachment: fixed;
     color: var(--texto);
     line-height: 1.6;
-    overflow: hidden;
 }
 
-a {
-    color: inherit;
-}
-
-h1, h2, h3 {
-    font-family: "Rajdhani", "Segoe UI", sans-serif;
-    letter-spacing: 0.5px;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 32px;
-    background: linear-gradient(180deg, rgba(10, 12, 22, 0.75), transparent);
-    border-bottom: none;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: "Rajdhani", sans-serif;
-    font-weight: 700;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-}
-
-.logo-icono {
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-    background: linear-gradient(135deg, var(--acento), var(--ps5));
-    box-shadow: 0 4px 14px rgba(124, 92, 255, 0.45);
-    animation: flotar 3s ease-in-out infinite;
-}
-
-.menu-checkbox {
-    display: none;
-}
-
-.menu-toggle-btn {
-    display: none;
-    font-size: 1.6rem;
-    cursor: pointer;
-    color: var(--texto);
-}
-
-.menu {
-    list-style: none;
-    display: flex;
-    gap: 34px;
-}
-
-.menu a {
-    text-decoration: none;
-    color: var(--texto-tenue);
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: color 0.25s ease;
-    position: relative;
-}
-
-.menu a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0;
-    height: 2px;
-    background: var(--acento-claro);
-    transition: width 0.25s ease;
-}
-
-.menu a:hover,
-.menu a.active {
-    color: var(--texto);
-}
-
-.menu a:hover::after,
-.menu a.active::after {
-    width: 100%;
-}
-
-.header-content {
-    text-align: center;
-    padding: 60px 24px 40px;
-}
-
-.header-content h1 {
-    font-size: 2.6rem;
-}
-
-.header-content p {
-    margin-top: 12px;
-    font-size: 1rem;
-    color: var(--texto-tenue);
-}
-
-/* ===== Footer (igual en todas las páginas) ===== */
-
-.footer {
-    border-top: 1px solid var(--borde);
-    margin-top: 40px;
-    padding: 30px 24px;
-}
-
-.footer-nota {
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--texto-tenue);
-}
 
 
 .pantalla-consolas {
@@ -174,7 +35,7 @@ h1, h2, h3 {
     align-items: stretch;
     justify-content: center;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     overflow: hidden;
 }
 
@@ -312,18 +173,11 @@ h1, h2, h3 {
 }
 
 
-
 .franja-expandida {
-    position: absolute;
-    inset: 0;
+    position: relative;
     z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0;
     width: 100%;
-    padding: 40px 44px;
+    padding: 40px;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
@@ -358,8 +212,8 @@ h1, h2, h3 {
 
 .franja-xbox .franja-fondo-marca {
     background:
-        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.22) 0%, transparent 58%),
-        linear-gradient(115deg, #145c22 0%, #1f8a34 45%, #34b94b 100%);
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        linear-gradient(115deg, #0d3d17 0%, #145c22 45%, #1f8a34 100%);
 }
 
 .franja-xbox .franja-fondo-marca::after {
@@ -371,8 +225,8 @@ h1, h2, h3 {
 
 .franja-ps5 .franja-fondo-marca {
     background:
-        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.22) 0%, transparent 58%),
-        linear-gradient(115deg, #0d3489 0%, #1959d6 45%, #3b84f5 100%);
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        linear-gradient(115deg, #061c4d 0%, #0d3489 45%, #1959d6 100%);
 }
 
 .franja-ps5 .franja-fondo-marca::after {
@@ -383,8 +237,8 @@ h1, h2, h3 {
 
 .franja-switch .franja-fondo-marca {
     background:
-        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.22) 0%, transparent 58%),
-        linear-gradient(115deg, #8a1a24 0%, #d92e3a 45%, #f0525d 100%);
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        linear-gradient(115deg, #4a0d14 0%, #8a1a24 45%, #d92e3a 100%);
 }
 
 .franja-switch .franja-fondo-marca::after {
@@ -395,8 +249,8 @@ h1, h2, h3 {
 
 .franja-steam .franja-fondo-marca {
     background:
-        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.22) 0%, transparent 58%),
-        linear-gradient(115deg, #124467 0%, #1f74b8 45%, #3f9ddb 100%);
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        linear-gradient(115deg, #0a2438 0%, #124467 45%, #1f74b8 100%);
 }
 
 .franja-steam .franja-fondo-marca::after {
@@ -406,78 +260,73 @@ h1, h2, h3 {
 }
 
 .franja-expandida .marca {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 2.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .franja-expandida h3 {
-    font-size: 2.4rem;
-    line-height: 1.1;
-    margin: 4px 0 10px;
+    font-size: 1.8rem;
+    margin: 6px 0 12px;
     white-space: nowrap;
 }
 
 .franja-control {
-    font-size: 0.88rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 28px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 26px;
 }
 
 .franja-subtitulo {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 1.8px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.6);
     margin-bottom: 14px;
 }
 
 .juegos-destacados {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 11px;
-    max-width: 500px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 640px;
 }
 
 .juego-bloque {
     position: relative;
-    width: 112px;
     aspect-ratio: 3 / 4;
     display: flex;
     align-items: flex-end;
-    border-radius: 8px;
-    padding: 9px 9px 8px;
+    border-radius: 10px;
+    padding: 12px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    border: 2px solid var(--color-marca, rgba(255, 255, 255, 0.5));
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.45),
+        0 0 14px -2px var(--color-marca, transparent),
+        inset 0 0 12px -4px var(--color-marca, transparent);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .juego-bloque:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-marca, rgba(255, 255, 255, 0.6));
+    transform: translateY(-6px);
     box-shadow:
-        0 12px 24px rgba(0, 0, 0, 0.5),
-        0 0 18px -2px var(--color-marca, transparent);
+        0 14px 28px rgba(0, 0, 0, 0.55),
+        0 0 26px 2px var(--color-marca, rgba(255, 255, 255, 0.4)),
+        inset 0 0 18px -4px var(--color-marca, transparent);
 }
 
 .juego-bloque span {
     position: relative;
-    z-index: 3;
-    width: 100%;
-    font-size: 0.72rem;
+    z-index: 2;
+    font-size: 0.85rem;
     font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.2px;
-    color: #fff;
-    text-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.95),
-        0 2px 8px rgba(0, 0, 0, 0.8);
+    line-height: 1.25;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
-
 
 
 .juego-bloque img {
@@ -568,7 +417,6 @@ h1, h2, h3 {
     background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.6));
 }
 
-
 .jb-4 {
     --borde-bloque: rgba(255, 209, 66, 0.7);
     background: linear-gradient(155deg, #c98a1f, #402c08);
@@ -597,18 +445,15 @@ h1, h2, h3 {
 
 .juego-bloque.jb-foto::before {
     inset: 0;
-    z-index: 2;
-    background: linear-gradient(180deg,
-        transparent 45%,
-        rgba(0, 0, 0, 0.55) 72%,
-        rgba(0, 0, 0, 0.92) 100%);
+    z-index: 1;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.75) 100%);
 }
 
 
-.franja-xbox { background-color: #0c3315; }
-.franja-ps5 { background-color: #0a1c44; }
-.franja-switch { background-color: #4a1018; }
-.franja-steam { background-color: #0d2c42; }
+.franja-xbox { background-color: #04140a; }
+.franja-ps5 { background-color: #05070d; }
+.franja-switch { background-color: #22060b; }
+.franja-steam { background-color: #061420; }
 
 
 .franja-fondo-consola {
@@ -617,13 +462,11 @@ h1, h2, h3 {
     z-index: 0;
     opacity: 0;
     pointer-events: none;
-    transform: scale(1.06);
-    transition: opacity 0.6s ease 0.1s, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s;
+    transition: opacity 0.5s ease 0.1s;
 }
 
 .franja:hover .franja-fondo-consola {
     opacity: 1;
-    transform: scale(1);
 }
 
 .franja-fondo-consola::after {
@@ -633,77 +476,44 @@ h1, h2, h3 {
 }
 
 .franja-xbox .franja-fondo-consola {
-    background: url("../imagnes/xbox-console-control.png") right 4% center / auto 80% no-repeat;
+    background: url("../imagnes/xbox-console-control.png") right 8% center / auto 72% no-repeat;
 }
 
 .franja-xbox .franja-fondo-consola::after {
-    background: linear-gradient(100deg, rgba(4, 20, 10, 0.88) 0%, rgba(4, 20, 10, 0.55) 38%, rgba(4, 20, 10, 0.12) 62%, rgba(4, 20, 10, 0) 100%);
+    background: linear-gradient(100deg, rgba(4, 20, 10, 0.92) 0%, rgba(4, 20, 10, 0.6) 50%, rgba(4, 20, 10, 0.2) 100%);
 }
 
 .franja-ps5 .franja-fondo-consola {
-    background: url("../imagnes/ps5-console-control.png") right 4% center / auto 84% no-repeat;
+    background: url("../imagnes/ps5-console-control.png") right 8% center / auto 78% no-repeat;
 }
 
 .franja-ps5 .franja-fondo-consola::after {
-    background: linear-gradient(100deg, rgba(5, 7, 13, 0.88) 0%, rgba(5, 7, 13, 0.55) 38%, rgba(5, 7, 13, 0.12) 62%, rgba(5, 7, 13, 0) 100%);
+    background: linear-gradient(100deg, rgba(5, 7, 13, 0.92) 0%, rgba(5, 7, 13, 0.6) 50%, rgba(5, 7, 13, 0.2) 100%);
 }
 
 .franja-switch .franja-fondo-consola {
-    background: url("../imagnes/switch2-console-control.png") right 3% center / auto 70% no-repeat;
+    background: url("../imagnes/switch2-console-control.png") right 6% center / auto 62% no-repeat;
 }
 
 .franja-switch .franja-fondo-consola::after {
-    background: linear-gradient(100deg, rgba(34, 6, 11, 0.88) 0%, rgba(34, 6, 11, 0.55) 38%, rgba(34, 6, 11, 0.12) 62%, rgba(34, 6, 11, 0) 100%);
+    background: linear-gradient(100deg, rgba(34, 6, 11, 0.92) 0%, rgba(34, 6, 11, 0.6) 50%, rgba(34, 6, 11, 0.2) 100%);
 }
 
 .franja-steam .franja-fondo-consola {
-    background: url("../imagnes/steam-deck-console-control.png") right 3% center / auto 66% no-repeat;
+    background: url("../imagnes/steam-deck-console-control.png") right 6% center / auto 58% no-repeat;
 }
 
 .franja-steam .franja-fondo-consola::after {
-    background: linear-gradient(100deg, rgba(6, 20, 32, 0.88) 0%, rgba(6, 20, 32, 0.55) 38%, rgba(6, 20, 32, 0.12) 62%, rgba(6, 20, 32, 0) 100%);
+    background: linear-gradient(100deg, rgba(6, 20, 32, 0.92) 0%, rgba(6, 20, 32, 0.6) 50%, rgba(6, 20, 32, 0.2) 100%);
 }
 
-
+/* ===== Responsive ===== */
 
 @media (max-width: 768px) {
-    .menu-toggle-btn {
-        display: block;
-    }
-
-    .menu {
-        position: fixed;
-        top: 68px;
-        right: 16px;
-        flex-direction: column;
-        gap: 0;
-        width: 220px;
-        background: var(--superficie);
-        border: 1px solid var(--borde);
-        border-radius: 12px;
-        overflow: hidden;
-        transform: translateX(140%);
-        transition: transform 0.3s ease;
-    }
-
-    .menu-checkbox:checked ~ .menu {
-        transform: translateX(0);
-    }
-
-    .menu li {
-        border-bottom: 1px solid var(--borde);
-    }
-
-    .menu a {
-        display: block;
-        padding: 14px 18px;
-    }
-
     .pantalla-consolas {
         height: 100dvh;
     }
 
-    
     .mosaico-consolas {
         flex-direction: column;
         height: 100%;
@@ -749,7 +559,7 @@ h1, h2, h3 {
             transparent 75%);
     }
 
-   
+
     .franja-colapsada {
         flex-direction: row;
         justify-content: center;
