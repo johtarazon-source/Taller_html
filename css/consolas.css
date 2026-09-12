@@ -666,6 +666,101 @@ h1, h2, h3 {
 
 
 
+.nav-consolas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    background: rgba(8, 10, 20, 0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-consolas a {
+    position: relative;
+    flex: 1;
+    padding: 16px 10px;
+    font-family: "Rajdhani", "Segoe UI", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.3s ease, background 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Aureola neon con el color de cada marca */
+
+.nav-consolas a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background: var(--neon);
+    border-radius: 3px 3px 0 0;
+    transform: translateX(-50%);
+    box-shadow:
+        0 0 8px var(--neon),
+        0 0 18px var(--neon);
+    transition: width 0.3s ease;
+}
+
+.nav-consolas a:hover,
+.nav-consolas a:focus-visible {
+    color: #fff;
+    background: linear-gradient(180deg, transparent 30%, var(--neon-suave) 100%);
+    text-shadow:
+        0 0 10px var(--neon),
+        0 0 26px var(--neon);
+}
+
+.nav-consolas a:hover::after,
+.nav-consolas a:focus-visible::after {
+    width: 100%;
+}
+
+.nav-xbox { --neon: #9bf00b; --neon-suave: rgba(155, 240, 11, 0.2); }
+.nav-ps5 { --neon: #4d95ff; --neon-suave: rgba(77, 149, 255, 0.2); }
+.nav-switch { --neon: #ff4655; --neon-suave: rgba(255, 70, 85, 0.2); }
+.nav-steam { --neon: #4fc3f7; --neon-suave: rgba(79, 195, 247, 0.2); }
+
+.franja:target {
+    flex-grow: 6;
+    filter: brightness(1.08);
+    z-index: 10;
+}
+
+.franja:target .franja-colapsada {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.franja:target .franja-expandida {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.franja:target .franja-fondo-marca {
+    opacity: 0;
+}
+
+.franja:target .franja-fondo-consola {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.mosaico-consolas:hover .franja:target:not(:hover) {
+    flex-grow: 1;
+}
+
+
 @media (max-width: 768px) {
     .menu-toggle-btn {
         display: block;
@@ -787,5 +882,13 @@ h1, h2, h3 {
     .juegos-destacados {
         grid-template-columns: repeat(2, 1fr);
         max-width: none;
+    }
+
+    .nav-consolas a {
+        padding: 12px 6px;
+        font-size: 0.72rem;
+        letter-spacing: 0.5px;
+        white-space: normal;
+        line-height: 1.2;
     }
 }
