@@ -365,7 +365,7 @@ h1, h2, h3 {
 .franja-xbox .franja-fondo-marca::after {
     width: 150px;
     height: 150px;
-    background: url("../imagnes/logo_xbox.png") center / contain no-repeat;
+    background: url("../imagenes/logo_xbox.png") center / contain no-repeat;
     opacity: 0.9;
 }
 
@@ -378,7 +378,7 @@ h1, h2, h3 {
 .franja-ps5 .franja-fondo-marca::after {
     width: 130px;
     height: 130px;
-    background: url("../imagnes/play_station.png") center / contain no-repeat;
+    background: url("../imagenes/play_station.png") center / contain no-repeat;
 }
 
 .franja-switch .franja-fondo-marca {
@@ -390,7 +390,7 @@ h1, h2, h3 {
 .franja-switch .franja-fondo-marca::after {
     width: 130px;
     height: 130px;
-    background: url("../imagnes/logo_nintendo.png") center / contain no-repeat;
+    background: url("../imagenes/logo_nintendo.png") center / contain no-repeat;
 }
 
 .franja-steam .franja-fondo-marca {
@@ -402,7 +402,7 @@ h1, h2, h3 {
 .franja-steam .franja-fondo-marca::after {
     width: 140px;
     height: 140px;
-    background: url("../imagnes/logo_steam.png") center / contain no-repeat;
+    background: url("../imagenes/logo_steam.png") center / contain no-repeat;
 }
 
 .franja-expandida .marca {
@@ -633,7 +633,7 @@ h1, h2, h3 {
 }
 
 .franja-xbox .franja-fondo-consola {
-    background: url("../imagnes/xbox-console-control.png") right 4% center / auto 80% no-repeat;
+    background: url("../imagenes/xbox-console-control.png") right 4% center / auto 80% no-repeat;
 }
 
 .franja-xbox .franja-fondo-consola::after {
@@ -641,7 +641,7 @@ h1, h2, h3 {
 }
 
 .franja-ps5 .franja-fondo-consola {
-    background: url("../imagnes/ps5-console-control.png") right 4% center / auto 84% no-repeat;
+    background: url("../imagenes/ps5-console-control.png") right 4% center / auto 84% no-repeat;
 }
 
 .franja-ps5 .franja-fondo-consola::after {
@@ -649,7 +649,7 @@ h1, h2, h3 {
 }
 
 .franja-switch .franja-fondo-consola {
-    background: url("../imagnes/switch2-console-control.png") right 3% center / auto 70% no-repeat;
+    background: url("../imagenes/switch2-console-control.png") right 3% center / auto 70% no-repeat;
 }
 
 .franja-switch .franja-fondo-consola::after {
@@ -657,7 +657,7 @@ h1, h2, h3 {
 }
 
 .franja-steam .franja-fondo-consola {
-    background: url("../imagnes/steam-deck-console-control.png") right 3% center / auto 66% no-repeat;
+    background: url("../imagenes/steam-deck-console-control.png") right 3% center / auto 66% no-repeat;
 }
 
 .franja-steam .franja-fondo-consola::after {
