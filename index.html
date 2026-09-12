@@ -3,130 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Zone 🎮</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Consolas</title>
+    <link rel="stylesheet" href="css/consolas.css">
     <link rel="stylesheet" href="css/animaciones.css">
 </head>
 <body>
 
-    <header class="header">
-        <nav class="navbar">
-            <div class="logo">
-                <span class="logo-icono"></span>
-                Game Zone
-            </div>
+    <main class="pantalla-consolas">
 
-            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
-            <label for="menu-toggle" class="menu-toggle-btn" aria-label="Abrir menú">☰</label>
+        <div class="mosaico-consolas">
 
-            <ul class="menu">
-                <li><a href="index.html" class="active">Inicio</a></li>
-                <li><a href="html/consolas.html">Consolas</a></li>
-                <li><a href="html/experiencia.html">Experiencia</a></li>
-                <li><a href="html/contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-
-        <div class="header-content container">
-            <h1>Game Zone</h1>
-            <p>
-                Tu punto de encuentro gamer: consolas de última generación,<br>
-                torneos, y todo lo que necesitas para jugar en serio.
-            </p>
-        </div>
-    </header>
-
-    <section class="destacadas">
-        <div class="destacadas-content container">
-            <h2>Consolas Destacadas</h2>
-            <p class="descripcion">
-                Prueba y descubre las consolas más pedidas del momento,
-                cada una con su propia zona de juego dentro del local.
-            </p>
-
-            <div class="destacadas-grid">
-                <div class="card">
-                    <div class="card-icono icono-xbox"></div>
+            <article class="franja franja-xbox">
+                <div class="franja-fondo-consola"></div>
+                <div class="franja-fondo-marca"></div>
+                <div class="franja-colapsada">
+                    <h3 class="franja-nombre">Xbox<br>Series X</h3>
+                </div>
+                <div class="franja-expandida">
+                    <span class="marca">Microsoft</span>
                     <h3>Xbox Series X</h3>
-                    <p>Potencia y catálogo Game Pass para maratones de juego sin límites.</p>
-                </div>
+                    <p class="franja-control">Control: <strong>Xbox Wireless Controller</strong></p>
 
-                <div class="card">
-                    <div class="card-icono icono-ps5"></div>
+                    <p class="franja-subtitulo">Juegos más destacados</p>
+                    <div class="juegos-destacados">
+                        <div class="juego-bloque jb-1 jb-foto"><img src="imagnes/halo-infinite.webp" alt="Halo Infinite"><span>Halo Infinite</span></div>
+                        <div class="juego-bloque jb-2 jb-foto"><img src="imagnes/forza-horizon-6-japan.jpg" alt="Forza Horizon 5"><span>Forza Horizon 5</span></div>
+                        <div class="juego-bloque jb-3 jb-foto"><img src="imagnes/gears-5.jpg" alt="Gears 5"><span>Gears 5</span></div>
+                        <div class="juego-bloque jb-4 jb-foto"><img src="imagnes/starfield.jpg" alt="Starfield"><span>Starfield</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="franja franja-ps5">
+                <div class="franja-fondo-consola"></div>
+                <div class="franja-fondo-marca"></div>
+                <div class="franja-colapsada">
+                    <h3 class="franja-nombre">PlayStation<br>5</h3>
+                </div>
+                <div class="franja-expandida">
+                    <span class="marca">Sony</span>
                     <h3>PlayStation 5</h3>
-                    <p>Exclusivos de altísimo nivel con el mando háptico DualSense.</p>
-                </div>
+                    <p class="franja-control">Control: <strong>DualSense</strong></p>
 
-                <div class="card">
-                    <div class="card-icono icono-switch"></div>
+                    <p class="franja-subtitulo">Juegos más destacados</p>
+                    <div class="juegos-destacados">
+                        <div class="juego-bloque jb-1 jb-foto"><img src="imagnes/the_las_of_us_2.jpg" alt="The Last of Us Part II"><span>The Last of Us Part II</span></div>
+                        <div class="juego-bloque jb-2 jb-foto"><img src="imagnes/god_of_war.jpg" alt="God of War Ragnarök"><span>God of War Ragnarök</span></div>
+                        <div class="juego-bloque jb-3 jb-foto"><img src="imagnes/spider_man_2.jpg" alt="Spider-Man 2"><span>Spider-Man 2</span></div>
+                        <div class="juego-bloque jb-4 jb-foto"><img src="imagnes/FFVIIRemake.png" alt="Final Fantasy VII Rebirth"><span>Final Fantasy VII Rebirth</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="franja franja-switch">
+                <div class="franja-fondo-consola"></div>
+                <div class="franja-fondo-marca"></div>
+                <div class="franja-colapsada">
+                    <h3 class="franja-nombre">Nintendo<br>Switch 2</h3>
+                </div>
+                <div class="franja-expandida">
+                    <span class="marca">Nintendo</span>
                     <h3>Nintendo Switch 2</h3>
-                    <p>Diversión portátil o en sala, ideal para jugar en grupo.</p>
-                </div>
+                    <p class="franja-control">Control: <strong>Joy-Con 2</strong></p>
 
-                <div class="card">
-                    <div class="card-icono icono-steam"></div>
+                    <p class="franja-subtitulo">Juegos más destacados</p>
+                    <div class="juegos-destacados">
+                        <div class="juego-bloque jb-1 jb-foto"><img src="imagnes/Mario_Kart_World_Cover_Artwork.png" alt="Mario Kart World"><span>Mario Kart World</span></div>
+                        <div class="juego-bloque jb-2 jb-foto"><img src="imagnes/The_Legend_of_Zelda_Tears_of_the_Kingdom_cover.jpg" alt="Zelda: Tears of the Kingdom"><span>Zelda: Tears of the Kingdom</span></div>
+                        <div class="juego-bloque jb-3 jb-foto"><img src="imagnes/animal_crossing.jpg" alt="Animal Crossing"><span>Animal Crossing</span></div>
+                        <div class="juego-bloque jb-4 jb-foto"><img src="imagnes/donkey_kong.jpg" alt="Donkey Kong Country"><span>Donkey Kong Country</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="franja franja-steam">
+                <div class="franja-fondo-consola"></div>
+                <div class="franja-fondo-marca"></div>
+                <div class="franja-colapsada">
+                    <h3 class="franja-nombre">Steam<br>Deck OLED</h3>
+                </div>
+                <div class="franja-expandida">
+                    <span class="marca">Valve</span>
                     <h3>Steam Deck OLED</h3>
-                    <p>Toda tu biblioteca de PC en un formato portátil.</p>
-                </div>
-            </div>
+                    <p class="franja-control">Control: <strong>Mandos integrados</strong></p>
 
-            <a href="html/consolas.html" class="btn-vermas">Ver más</a>
+                    <p class="franja-subtitulo">Juegos más destacados</p>
+                    <div class="juegos-destacados">
+                        <div class="juego-bloque jb-1 jb-foto"><img src="imagnes/elden_ring.jpg" alt="Elden Ring"><span>Elden Ring</span></div>
+                        <div class="juego-bloque jb-2 jb-foto"><img src="imagnes/baldurs_gate_3.jpg" alt="Baldur's Gate 3"><span>Baldur's Gate 3</span></div>
+                        <div class="juego-bloque jb-3 jb-foto"><img src="imagnes/cyberpunk_2077.jpg" alt="Cyberpunk 2077"><span>Cyberpunk 2077</span></div>
+                        <div class="juego-bloque jb-4 jb-foto"><img src="imagnes/Hades_2_cover_art.jpeg" alt="Hades II"><span>Hades II</span></div>
+                    </div>
+                </div>
+            </article>
+
         </div>
-    </section>
 
-    <section class="experiencia-index">
-        <div class="container">
-            <h2>Nuestra Zona</h2>
-            <p>
-                No es solo jugar, es la experiencia completa: torneos, salas privadas
-                y un espacio pensado para la comunidad gamer.
-            </p>
-
-            <div class="grid">
-                <div class="item item-torneos">
-                    <div class="overlay">Torneos Nocturnos</div>
-                </div>
-
-                <div class="item item-vip">
-                    <div class="overlay">Salas VIP</div>
-                </div>
-
-                <div class="item item-streaming">
-                    <div class="overlay">Zona de Streaming</div>
-                </div>
-            </div>
-
-            <a href="html/experiencia.html" class="btn">Ver más...</a>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-content container">
-            <div class="link">
-                <h3>NOSOTROS</h3>
-                <ul>
-                    <li>Game Zone</li>
-                    <li>NIT 90000012</li>
-                    <li>Tunja, Boyacá</li>
-                </ul>
-            </div>
-            <div class="link">
-                <h3>CONTÁCTANOS</h3>
-                <ul>
-                    <li>contacto@gamezone.com</li>
-                    <li>+57 320 111 4477</li>
-                </ul>
-            </div>
-            <div class="link">
-                <h3>SÍGUENOS</h3>
-                <ul>
-                    <li>@gamezone</li>
-                    <li>En todas las redes sociales</li>
-                </ul>
-            </div>
-        </div>
-        <p class="footer-nota">Game Zone © 2026</p>
-    </footer>
+    </main>
 
 </body>
 </html>
